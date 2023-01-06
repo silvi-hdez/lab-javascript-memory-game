@@ -4,10 +4,17 @@ class MemoryGame {
     this.pickedCards = [];
     this.pairsClicked = 0;
     this.pairsGuessed = 0;
-    this.isFinished = false;
+    this.shuffleCards();
   }
 
-  shuffleCards() {}
+  shuffleCards() {
+    for (let i = this.cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = this.cards[i];
+      this.cards[i] = this.cards[j];
+      this.cards[j] = temp;
+    }
+  }
 
   checkIfPair(card1, card2) {
     this.pairsClicked += 1;
@@ -20,12 +27,10 @@ class MemoryGame {
   }
 
   checkIfFinished() {
-    if ((this.pickedCards.length = 2)) {
-      this.isFinished = true;
-      return this.isFinished;
+    if (this.cards.length / 2 === this.pairsGuessed) {
+      return true;
     } else {
-      this.isFinished = false;
-      return this.isFinished;
+      return false;
     }
   }
 }
